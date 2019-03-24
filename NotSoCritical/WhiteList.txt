@@ -3,4 +3,4 @@
 System
 Idle
 Registry
-
+Memory compression
