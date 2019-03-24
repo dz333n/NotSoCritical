@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -13,10 +14,27 @@ namespace NotSoCritical
         private static extern int NtSetInformationProcess(IntPtr hProcess, int processInformationClass, ref int processInformation, int processInformationLength);
 
         static int total = 0, totalok = 0, totalerror = 0;
+        static string[] WhiteList = { "System", "Idle", "Registry", "Memory Compression" };
 
         static void Main(string[] args)
         {
             Console.Title = $"Not So Critical [{Environment.UserDomainName}\\{Environment.UserName}]";
+
+            if (File.Exists("WhiteList.txt"))
+            {
+                using (StreamReader r = new StreamReader("WhiteList.txt"))
+                {
+                    string[] white = r.ReadToEnd().Split(new string[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+                    List<string> check = new List<string>();
+                    foreach(var str in white)
+                    {
+                        if (!str.StartsWith("#"))
+                            check.Add(str);
+                    }
+                    WhiteList = check.ToArray();
+                }
+            }
+
             Console.WriteLine("All processes will become uncritical, so if you kill one of them no one will cause BSOD.");
 
             Console.Write("Continue? [y/n] ");
@@ -46,6 +64,17 @@ namespace NotSoCritical
             Console.ReadKey();
         }
 
+        static bool IsInWhiteList(string thing)
+        {
+            foreach(var w in WhiteList)
+            {
+                if (w.ToLower() == thing.ToLower())
+                    return true;
+            }
+
+            return false;
+        }
+
         static void MakeProcess(Process p)
         {
             int isCritical = 0;
@@ -53,6 +82,13 @@ namespace NotSoCritical
 
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.Write("Process: " + p.ProcessName + " - ");
+
+            if(IsInWhiteList(p.ProcessName))
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("ignore");
+                return;
+            }
 
             int result = 1;
             try

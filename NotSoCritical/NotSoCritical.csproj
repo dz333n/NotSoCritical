@@ -61,5 +61,10 @@
       <Name>RunAsSystem</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="WhiteList.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

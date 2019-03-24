@@ -1,0 +1,6 @@
+# this is comment
+# split by new lines
+System
+Idle
+Registry
+
