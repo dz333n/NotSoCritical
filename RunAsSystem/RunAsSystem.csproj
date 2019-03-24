@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8A52A60B-4713-4F43-97EC-32AFDBA3F29F}</ProjectGuid>
+    <ProjectGuid>{7CA07B3D-927D-4E1D-86E8-20CDCF0A1C00}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>NotSoCritical</RootNamespace>
-    <AssemblyName>NotSoCritical</AssemblyName>
+    <RootNamespace>RunAsSystem</RootNamespace>
+    <AssemblyName>RunAsSystem</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -36,30 +36,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.manifest" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="PsExec.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RunAsSystem\RunAsSystem.csproj">
-      <Project>{7ca07b3d-927d-4e1d-86e8-20cdcf0a1c00}</Project>
-      <Name>RunAsSystem</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
